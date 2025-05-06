@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "../App.css";
+import ProductCard from "../components/ProductCard";
+import "../App.css"; // Ensure your styles are defined here
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -41,12 +40,7 @@ const Home = () => {
           <h2>{category.toUpperCase()}</h2>
           <div className="product-grid">
             {groupedByCategory[category].map((product) => (
-              <div key={product.id} className="product-card">
-                <img src={product.image} alt={product.title} />
-                <h3>{product.title}</h3>
-                <p>${product.price.toFixed(2)}</p>
-                <Link to={`/product/${product.id}`}>View Details</Link>
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>

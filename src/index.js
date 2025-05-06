@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import { CartProvider } from "./context/CartContext";
 import App from './App';
 import { AuthProvider } from "./context/AuthContext";
 import "./App.css";
@@ -8,9 +9,15 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+ 
+
   <AuthProvider>
-  <App />
+  <CartProvider>
+    <App />
+  </CartProvider>
 </AuthProvider>
+
+
 );
 
 // If you want to start measuring performance in your app, pass a function

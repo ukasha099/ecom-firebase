@@ -146,6 +146,60 @@ body {
 
 
 
+/* App.css */
+.home {
+  padding: 20px;
+}
+
+.category-section {
+  margin-bottom: 40px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-img {
+  max-width: 100px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.button-group {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .App {
   text-align: center;
 }

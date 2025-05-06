@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-const mockProducts = [
-  { id: 1, name: "Phone", price: 499, description: "Smartphone", image: "https://www.zdnet.com/a/img/resize/9f3fcf4ecd3e5140/2024/09/19/8da68e24-08b1-467a-906200" },
-  { id: 2, name: "Laptop", price: 999, description: "High-performance laptop", image: "https://via.placeholder.com/150" },
-];
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const product = mockProducts.find((p) => p.id === parseInt(id));
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!product) return <div>Product not found</div>;
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+        if (!res.ok) throw new Error("Product not found");
+        const data = await res.json();
+        setProduct(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [id]);
+
+  if (loading) return <p className="loading">Loading product...</p>;
+  if (error || !product) return <p className="error">{error || "Product not found"}</p>;
 
   return (
     <div className="product-details">
-      <img src={product.image} alt={product.name} />
-      <h2>{product.name}</h2>
+      <img src={product.image} alt={product.title} />
+      <h2>{product.title}</h2>
       <p>{product.description}</p>
-      <p>${product.price}</p>
+      <p>${product.price.toFixed(2)}</p>
       <button>Add to Cart</button>
     </div>
   );
